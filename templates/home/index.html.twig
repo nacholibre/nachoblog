@@ -1,0 +1,15 @@
+{% import "macros.html.twig" as macros %}
+
+{% extends 'sidebar_layout.html.twig' %}
+
+{% block title 'Yoan Arnaudov Blog' %}
+
+{% block content %}
+    {% for post in pagination %}
+    {{ macros.renderPost(post, loop) }}
+    {% endfor %}
+
+    <div class="navigation">
+        {{ knp_pagination_render(pagination) }}
+    </div>
+{% endblock %}

@@ -1,0 +1,73 @@
+{% extends 'base.html.twig' %}
+
+{% block title 'Yoan Arnaudov Blog' %}
+
+{% block body %}
+<div class='bg-white border-bottom shadow-sm p-3'>
+    <div class='container p-0'>
+        <div class="d-flex flex-column flex-md-row align-items-center">
+            <h5 class="my-0 mr-md-auto font-weight-normal">
+                <a href='{{ path('home') }}'>Yoan Arnaudov Blog</a>
+                @nacholibre
+            </h5>
+
+            {#
+            <nav class="my-2 my-md-0">
+                <a class="p-2 text-dark" href="#">About</a>
+                <a class="p-2 text-dark" href="#">Archive</a>
+            </nav>
+            #}
+        </div>
+    </div>
+</div>
+<main role="main" class="container">
+<div class="row bg-white mt-3 rounded shadow-sm">
+    <div class="col-md-8 blog-main pb-3 pt-3">
+        {% block content %}{% endblock %}
+        {#
+        <nav class="blog-pagination">
+        <a class="btn btn-outline-primary" href="#">Older</a>
+        <a class="btn btn-outline-secondary disabled" href="#" tabindex="-1" aria-disabled="true">Newer</a>
+        </nav>
+        #}
+
+    </div><!-- /.blog-main -->
+
+    <aside class="col-md-4 blog-sidebar">
+    {#
+    <div class="p-4 mb-3 bg-light rounded">
+        <h4 class="font-italic">About</h4>
+        <p class="mb-0">Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
+    </div>
+    #}
+
+    <div class="p-4">
+        <h4 class="font-italic">Archives</h4>
+        <ol class="list-unstyled mb-0">
+            {% for post in get_sidebar_archive() %}
+            <li>
+                <a href="{{ path('archive.view', {month: post[0].getCreatedAt() | date('m'), year: post[0].getCreatedAt() | date('Y')}) }}">
+                    {{ post[0].getCreatedAt() | date('F') }}
+                    {{ post[0].getCreatedAt() | date('Y') }}
+                </a>
+            </li>
+            {% endfor %}
+        </ol>
+    </div>
+
+    {#
+    <div class="p-4">
+        <h4 class="font-italic">Elsewhere</h4>
+        <ol class="list-unstyled">
+            <li><a href="#">GitHub</a></li>
+            <li><a href="#">Twitter</a></li>
+            <li><a href="#">Facebook</a></li>
+        </ol>
+    </div>
+    #}
+    </aside><!-- /.blog-sidebar -->
+
+</div><!-- /.row -->
+
+</main>
+{% endblock %}

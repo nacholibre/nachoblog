@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <title>{% block title %}yarnaudov.com{% endblock %}</title>
+
+        {% if canonical is defined and canonical %}
+        <link rel="canonical" href="{{ canonical }}" />
+        {% endif %}
+
+        {% if noindex is defined and noindex %}
+        <meta name="robots" content="noindex" />
+        {% endif %}
+
+        {% if metaDescription is defined and metaDescription  %}
+        <meta name="description" content="{{ metaDescription }}">
+        {% endif %}
+
+        {#
+        <link rel="icon" type="image/png" href="/favicon.png" />
+        #}
+
+        {% block stylesheets %}
+        {{ encore_entry_link_tags('app') }}
+        {% endblock %}
+    </head>
+    <body>
+        {% block body %}{% endblock %}
+
+        <div class='footer mt-4 mb-4 text-center'>
+            <div class='container'>
+                {{ 'now' | date('Y') }}, yarnaudov.com<br />
+            </div>
+        </div>
+
+        {% block javascripts %}
+        {{ encore_entry_script_tags('app') }}
+        {% endblock %}
+    </body>
+</html>

@@ -1,0 +1,16 @@
+{% extends 'admin_layout.html.twig' %}
+
+{% block title title %}
+
+{% block content %}
+{{ form_start(form) }}
+{{ form_row(form.title) }}
+{{ form_row(form.slug) }}
+{{ form_row(form.text) }}
+<div class='form-group'>
+    <label for="post_text" class="required">Content</label>
+    <trix-editor style='min-height:400px;' input='post_text' class='trix-content'></trix-editor>
+</div>
+<button class='btn btn-success'>Save</button>
+{{ form_end(form) }}
+{% endblock %}

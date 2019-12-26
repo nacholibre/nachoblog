@@ -1,0 +1,17 @@
+{% import "macros.html.twig" as macros %}
+
+{% extends 'sidebar_layout.html.twig' %}
+
+{% block title title %}
+
+{% block content %}
+<h1 class='h2'>{{ title }}</h1>
+<hr>
+    {% for post in pagination %}
+    {{ macros.renderPost(post, loop) }}
+    {% endfor %}
+
+    <div class="navigation">
+        {{ knp_pagination_render(pagination) }}
+    </div>
+{% endblock %}
