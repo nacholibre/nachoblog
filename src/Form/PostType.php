@@ -8,6 +8,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 
 class PostType extends AbstractType
 {
@@ -20,7 +21,7 @@ class PostType extends AbstractType
             ->add('slug', TextType::class, [
                 'label' => 'Slug',
             ])
-            ->add('text', HiddenType::class, [
+            ->add('text', CKEditorType::class, [
                 'label' => 'Content',
             ])
         ;

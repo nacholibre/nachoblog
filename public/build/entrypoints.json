@@ -12,11 +12,11 @@
     "admin": {
       "js": [
         "/build/runtime.5e3ab09c.js",
-        "/build/0.4f8f857a.js",
-        "/build/admin.7644a246.js"
+        "/build/1.6b88cdb8.js",
+        "/build/admin.ee72faed.js"
       ],
       "css": [
-        "/build/0.cf99beed.css",
+        "/build/1.cf99beed.css",
         "/build/admin.0e07afef.css"
       ]
     }
