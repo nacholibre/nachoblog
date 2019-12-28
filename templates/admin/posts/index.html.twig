@@ -7,26 +7,31 @@
 <table class='table table-bordered mt-3'>
     <thead>
         <tr>
-            <th>ID</th>
+            <th style='width:20px;'>ID</th>
             <th>Title</th>
             <th>Slug</th>
-            <th>Created At</th>
-            <th>Actions</th>
+            <th style='width:170px'>Created At</th>
+            <th style='width:170px;'>Actions</th>
         </tr>
     </thead>
     <tbody>
         {% for post in pagination %}
-        <tr>
+        <tr {% if post.getDraft() %}class='table-warning'{% endif %}>
             <td>{{ post.getId() }}</td>
-            <td>{{ post.getTitle() }}</td>
-            <td>{{ post.getSlug() }}</td>
-            <td>{{ post.getCreatedAt() | date }}</td>
             <td>
-                <a href='{{ path('admin.posts.edit', {id: post.id}) }}' class='btn btn-secondary'>
+                {% if post.getDraft() %}
+                <span class='text-danger'>Draft</span>
+                {% endif %}
+                {{ post.getTitle() }}
+            </td>
+            <td>{{ post.getSlug() }}</td>
+            <td>{{ post.getCreatedAt() | date('j M Y, H:i') }}</td>
+            <td>
+                <a href='{{ path('admin.posts.edit', {id: post.id}) }}' class='btn btn-sm btn-secondary'>
                     <i class="fas fa-edit"></i>
                     edit
                 </a>
-                <a href='{{ path('admin.posts.delete', {id: post.id}) }}' class='btn btn-danger'>
+                <a href='{{ path('admin.posts.delete', {id: post.id}) }}' class='btn btn-sm btn-danger'>
                     <i class="fas fa-trash-alt"></i>
                     delete
                 </a>

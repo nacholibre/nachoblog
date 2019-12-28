@@ -21,11 +21,11 @@ class ArchiveController extends AbstractController
 
         $title = 'Archive ' . $date->format('F Y');
 
-        $em = $this->getDoctrine()->getManager();
+        $query = $repo->getAllPostsQuery($this->getUser(), $date);
 
-        $dql   = "SELECT a FROM App:Post a where a.createdAt like :createdAt order by a.id DESC";
-        $query = $em->createQuery($dql);
-        $query->setParameter('createdAt', $date->format('Y-m').'%');
+        //$dql   = "SELECT a FROM App:Post a where a.createdAt like :createdAt order by a.id DESC";
+        //$query = $em->createQuery($dql);
+        //$query->setParameter('createdAt', $date->format('Y-m').'%');
 
         $pagination = $paginator->paginate(
             $query, /* query NOT result */

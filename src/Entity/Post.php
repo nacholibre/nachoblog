@@ -9,6 +9,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Post
 {
+    const READMORE_SPLIT_TAG = '@@readmore@@';
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -30,6 +32,11 @@ class Post
      * @ORM\Column(type="text")
      */
     private $text;
+
+    /**
+    * @ORM\Column(name="draft", type="boolean")
+    */
+    private $draft = false;
 
     /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="posts")
@@ -109,5 +116,27 @@ class Post
         $this->createdBy = $createdBy;
 
         return $this;
+    }
+
+    public function getDraft(): ?bool
+    {
+        return $this->draft;
+    }
+
+    public function setDraft(bool $draft): self
+    {
+        $this->draft = $draft;
+
+        return $this;
+    }
+
+    public function hasReadmore() {
+        return (strpos($this->getText(), self::READMORE_SPLIT_TAG) !== false);
+    }
+
+    public function getReadmoreText() {
+        $x = explode(self::READMORE_SPLIT_TAG, $this->getText());
+
+        return $x[0];
     }
 }

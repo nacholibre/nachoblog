@@ -4,10 +4,15 @@
 
 {% block content %}
 <div class='border-bottom pb-2'>
-    <h1 class='mb-0 pb-0 h2'>{{ post.getTitle() }}</h1>
+    <h1 class='mb-0 pb-0 h2'>
+        {% if post.getDraft() %}
+        <span class='text-danger'>Draft</span>
+        {% endif %}
+        {{ post.getTitle() }}
+    </h1>
     <p class="blog-post-meta pb-0 mb-0">{{ post.getCreatedAt() | date('d F, Y') }} by {{ post.getCreatedBy().getName() }}</p>
 </div>
 <div class='pt-2'>
-{{ post.getText() | raw }}
+{{ post.getText() | strip_readmore | raw }}
 </div>
 {% endblock %}

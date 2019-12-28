@@ -1,12 +1,20 @@
 {% macro renderPost(post, loop) %}
     <div class="blog-post {% if not loop.last %}border-bottom{% endif %} mb-3 pb-3">
         <h2 class="blog-post-title">
+            {% if post.getDraft() %}
+            <span class='text-danger'>Draft</span>
+            {% endif %}
             <a href='{{ path('post.view', {slug: post.getSlug()}) }}'>
                 {{ post.getTitle() }}
             </a>
         </h2>
         <p class="blog-post-meta">{{ post.getCreatedAt() | date('d F, Y') }} by {{ post.getCreatedBy().getName() }}</p>
 
-        {{ post.getText() | raw }}
+        {% if post.hasReadmore() %}
+        {{ post.getReadmoreText() | raw }}
+        <button onclick='window.location.href = "{{ path('post.view', {slug: post.getSlug()}) }}"' class='btn btn-sm btn-primary' type='button'>Read more</button>
+        {% else %}
+            {{ post.getText() | raw }}
+        {% endif %}
     </div><!-- /.blog-post -->
 {% endmacro %}

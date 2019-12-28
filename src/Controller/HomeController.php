@@ -15,9 +15,9 @@ class HomeController extends AbstractController
     public function index(Request $request, PaginatorInterface $paginator)
     {
         $em = $this->getDoctrine()->getManager();
+        $repo = $em->getRepository('App:Post');
 
-        $dql   = "SELECT a FROM App:Post a order by a.id DESC";
-        $query = $em->createQuery($dql);
+        $query = $repo->getAllPostsQuery($this->getUser());
 
         $pagination = $paginator->paginate(
             $query, /* query NOT result */

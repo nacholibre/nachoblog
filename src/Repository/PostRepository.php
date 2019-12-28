@@ -30,6 +30,23 @@ class PostRepository extends ServiceEntityRepository
         ;
     }
 
+    public function getAllPostsQuery($user=null, $dateFilter=null) {
+        $qb = $this->createQueryBuilder('p')
+            ->orderBy('p.id', 'DESC')
+        ;
+
+        if (!$user) {
+            $qb->andWhere('p.draft = false');
+        }
+
+        if ($dateFilter) {
+            $qb->andWhere('p.createdAt like :createdAt');
+            $qb->setParameter('createdAt', $dateFilter->format('Y-m').'%');
+        }
+
+        return $qb->getQuery();
+    }
+
     /*
     public function findOneBySomeField($value): ?Post
     {
