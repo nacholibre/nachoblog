@@ -24,6 +24,7 @@ class PostType extends AbstractType
             ])
             ->add('draft', CheckboxType::class, [
                 'label' => 'Draft (only visible for you)',
+                'required' => false,
             ])
             ->add('readmore', TextType::class, [
                 'label' => 'Readmore tag (put this in order to split your post with readmore button)',
